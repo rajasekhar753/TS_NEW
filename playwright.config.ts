@@ -18,9 +18,9 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 3 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -39,7 +39,7 @@ export default defineConfig({
       name : 'chrome',
       use: {
        browserName : 'chromium',
-       headless : true,
+       headless : false,
        screenshot : 'on',
        video: 'on',
        ignoreHttpsErrors:true,
@@ -48,16 +48,40 @@ export default defineConfig({
        trace : 'on',//off,on
        // ...devices['']
        // viewport : {width:720,height:720}
-    },
-
+    }
+  },
+  {
+  
+      name : 'firefox',
+      use: {
+       browserName : 'firefox',
+       headless : false,
+       screenshot : 'on',
+       video: 'on',
+       ignoreHttpsErrors:true,
+       permissions:['geolocation'],
+        
+       trace : 'on',//off,on
+       // ...devices['']
+       // viewport : {width:720,height:720}
+    }
+  },
+  
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      
+      name : 'safari',
+      use: {
+       browserName : 'webkit',
+       headless : false,
+       screenshot : 'on',
+       video: 'on',
+       ignoreHttpsErrors:true,
+       permissions:['geolocation'],
+       trace : 'on',//off,on
+       // ...devices['']
+       // viewport : {width:720,height:720}
+    }
+    
     },
 
     /* Test against mobile viewports. */
