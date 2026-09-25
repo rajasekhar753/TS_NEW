@@ -26,18 +26,9 @@ async goto(){
     }
 
 
- async lockedoutuser(){
-    await this.page.goto('https://www.saucedemo.com/');
-    await this.usernameInput.fill(sample[1].invalidUsername);
-    await this.passwordInput.fill(sample[1].invalidPassword);
-    await this.loginButton.click();
-    await this.errorMessage.isVisible();
-    const errorMessageText = await this.errorMessage.textContent();
-    await console.log('Error message:', errorMessageText);
-    await console.log('i am test2');    
 
 
 }
-}
+
 
 
